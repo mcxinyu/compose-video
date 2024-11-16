@@ -19,26 +19,26 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
-    signingConfigs {
-        getByName("debug") {
-            storeFile = rootProject.file("debug.keystore")
-            storePassword = "android"
-            keyAlias = "androiddebugkey"
-            keyPassword = "android"
-        }
-    }
+    // signingConfigs {
+    //     getByName("debug") {
+    //         storeFile = rootProject.file("debug.keystore")
+    //         storePassword = "android"
+    //         keyAlias = "androiddebugkey"
+    //         keyPassword = "android"
+    //     }
+    // }
 
     buildTypes {
         debug {
-            signingConfig = signingConfigs.getByName("debug")
+            // signingConfig = signingConfigs.getByName("debug")
         }
         create("benchmark") {
             isDebuggable = false
-            signingConfig = signingConfigs.getByName("debug")
+            // signingConfig = signingConfigs.getByName("debug")
             matchingFallbacks.add("release")
         }
         release {
-            signingConfig = signingConfigs.getByName("debug")
+            // signingConfig = signingConfigs.getByName("debug")
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }

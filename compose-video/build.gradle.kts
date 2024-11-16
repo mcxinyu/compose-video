@@ -1,14 +1,15 @@
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 
-apply(from = "${rootDir}/publish.gradle")
-apply(from = "${rootDir}/scripts/publish-root.gradle")
-apply(from = "${rootDir}/scripts/publish-module.gradle")
+// apply(from = "${rootDir}/publish.gradle")
+// apply(from = "${rootDir}/scripts/publish-root.gradle")
+// apply(from = "${rootDir}/scripts/publish-module.gradle")
 
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("me.tylerbwong.gradle.metalava") version "0.3.2"
     id("org.jetbrains.dokka")
+    `maven-publish`
 }
 
 metalava {
@@ -53,6 +54,20 @@ android {
 afterEvaluate {
     tasks.named("dokkaHtmlPartial") {
 
+    }
+
+    publishing {
+        publications {
+            create<MavenPublication>("XXX") {
+                afterEvaluate { from(components["release"]) }
+            }
+        }
+        repositories {
+            maven {
+                name = "XXX"
+                url = uri("${project.buildDir}/repo")
+            }
+        }
     }
 }
 
